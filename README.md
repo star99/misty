@@ -1,4 +1,4 @@
 Misty 
 =====
 
-A wordpress theme forked from Misty Look and/or Mist Lake
+A wordpress theme forked from Mistylook and/or Mistylake

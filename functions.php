@@ -1,4 +1,11 @@
 <?php
+// WordPress 3.0 Features
+// This theme allows users to set a custom background
+if (function_exists('add_custom_background')) add_custom_background();
+
+// This theme allows users to use custom menus
+	if (function_exists('register_nav_menus')) register_nav_menus( array('primary' => __( 'Top Navigation', 'ml' ),) );
+  
 // helper functions
   if ( function_exists('wp_list_bookmarks') ) //used to check WP 2.1 or not
     $numposts = $wpdb->get_var("SELECT COUNT(*) FROM $wpdb->posts WHERE post_type='post' and post_status = 'publish'");
@@ -120,10 +127,10 @@ function mistylook_theme_page() {
 </style>
 <div class="wrap">
 
-<h2>MistyLook 3.7.2</h2>
+<h2>MistyLook 3.8</h2>
 
 <div class="block"><h4><?php _e('Theme Page:','ml');?> <a href="http://wpthemes.info/misty-look/">MistyLook</a> </h4>
-					<h4><?php _e('Designed & Coded by:','ml');?><a href="http://wprocks.com/" title="WordPress Rocks!"  target="_blank">Sadish Bala</a></h4>
+					<h4><?php _e('Designed & Coded by:','ml');?>Sadish Bala</h4>
 
 </div>
 
@@ -145,40 +152,10 @@ function mistylook_theme_page() {
 </td>
 </tr>
 <tr valign="top">
-<td align="left">
-	<?php
-	ml_heading(__("List Pages / Navigation",'ml'));
-		global $wpdb;
-		if (function_exists('wp_list_bookmarks')) //WP 2.1 or greater
-			$results = $wpdb->get_results("SELECT ID, post_title from $wpdb->posts WHERE post_type='page' AND post_parent=0 ORDER BY post_title");
-		else
-			$results = $wpdb->get_results("SELECT ID, post_title from $wpdb->posts WHERE post_status='static' AND post_parent=0 ORDER BY post_title");
-
-		$excludepages = explode(',', get_settings('mistylook_excludepages'));
-		if($results) {
-			echo "<br/>";_e('Exclude the Following Pages from the Top Navigation','ml');echo "<br/><br/>";
-			foreach($results as $page)
-      {
-			  echo '<input type="checkbox" name="excludepages[]" value="' . $page->ID . '"';
-        if(in_array($page->ID, $excludepages)==true) { echo ' checked="checked"'; }
-				echo ' /> <a href="' . get_permalink($page->ID) . '">' . $page->post_title . '</a><br />';
-			}
-		}
-		echo '<br/><br/>';
-		echo "<br/><strong> ";_e('Sort the List Pages by','ml');echo " </strong><br/>";
-
-		ml_input( "s_sortpages", "radio", __("Page Title ?",'ml'), "post_title", get_settings( 'mistylook_sortpages' ) );
-		ml_input( "s_sortpages", "radio", __("Date ?",'ml'), "post_date", get_settings( 'mistylook_sortpages' ) );
-		ml_input( "s_sortpages", "radio", __("Page Order ?",'ml'), "menu_order", get_settings( 'mistylook_sortpages' ) );
-		_e("(Each Page can be given a page order number, from the wordpress admin, edit page area)",'ml');
-		echo "<br/>";
-?>
-</td>
 <td>
 <?php
 	ml_heading( __("Support for Asides / Side Notes",'ml') );
 	_e("Asides are the 'quick bits' of information you want to post. They do not have to look like a regular post.",'ml');
-	echo "<br/><br/>"; _e('Learn More at','ml'); echo " <a href='http://photomatt.net/2004/05/19/asides/'>Matt's Asides technique</a>";
 ?>
 	<?php
 		global $wpdb;
@@ -317,7 +294,7 @@ function ml_heading( $title ) {
 
 define('HEADER_TEXTCOLOR', '');
 define('HEADER_IMAGE', '%s/img/misty.jpg'); // %s is theme dir uri
-define('HEADER_IMAGE_WIDTH', 760);
+define('HEADER_IMAGE_WIDTH', 960);
 define('HEADER_IMAGE_HEIGHT', 200);
 define( 'NO_HEADER_TEXT', true );
 

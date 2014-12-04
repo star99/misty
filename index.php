@@ -32,7 +32,7 @@
 				<div class="entry">
 					<?php the_content(__('Continue Reading &raquo;','ml')); ?>
 					<?php wp_link_pages(); ?>
-					<p class="postmetadata"><?php if (function_exists('the_tags')) the_tags(__('Tags: ','ml'), ', ', '<br/>'); ?> </p>
+					<p><?php if (function_exists('the_tags')) the_tags(__('Tags: ','ml'), ', ', '<br/>'); ?> </p>
 				</div>
 
 				<p class="postmetadata"><?php _e('Posted in','ml');?> <?php the_category(', ') ?> | <?php comments_popup_link(__('No Comments &#187;','ml'), __('1 Comment &#187;','ml'), __('% Comments &#187;','ml'),'',__('Comments Off','ml')); ?></p>

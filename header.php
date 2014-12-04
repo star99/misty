@@ -1,42 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
-<head profile="http://gmpg.org/xfn/11">
+<head>
 <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
-<title><?php bloginfo('name'); ?> <?php if ( is_single() ) { ?> &raquo; <?php _e('Blog Archive','ml');?> <?php } ?> <?php wp_title(); ?></title>
-<meta name="generator" content="WordPress <?php bloginfo('version'); ?>" /> <!-- leave this for stats -->
-<meta name="keywords" content="<?php bloginfo('description'); ?>" />
-<meta name="description" content="<?php bloginfo('description'); ?>" />
-<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
-<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> <?php _e('RSS Feed','ml');?>" href="<?php bloginfo('rss2_url'); ?>" />
-<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-<?php
-global $page_sort;
-	if(get_settings('mistylook_sortpages')!='')
-	{
-		$page_sort = 'sort_column='. get_settings('mistylook_sortpages');
-	}
-	global $pages_to_exclude;
-
-	if(get_settings('mistylook_excludepages')!='')
-	{
-		$pages_to_exclude = 'exclude='. get_settings('mistylook_excludepages');
-	}
-?>
-<?php wp_head(); ?>
+    <title><?php wp_title('&laquo;', true, 'right'); ?> <?php bloginfo('name'); ?></title>
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+    <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
+	<link rel="stylesheet" type="text/css" media="print" href="<?php bloginfo( 'stylesheet_directory' ); ?>/print.css" />
+	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> <?php _e('RSS Feed','ml');?>" href="<?php bloginfo('rss2_url'); ?>" />
+	<?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?>
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+    <?php wp_head(); ?>
 </head>
-<body id="section-index">
+<body id="section-index"  <?php body_class(); ?>>
 
 
-<div id="navigation">
-<ul>
-	<li <?php if(is_home()){echo 'class="current_page_item"';}?>><a href="<?php bloginfo('siteurl'); ?>/" title="<?php _e('Home','ml');?>"><?php _e('Home','ml');?></a></li>
-		<?php wp_list_pages('title_li=&depth=1&'.$page_sort.'&'.$pages_to_exclude)?>
-	<li class="search"><form method="get" id="searchform" action="<?php bloginfo('home'); ?>"><input type="text" class="textbox" value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" /><input type="submit" id="searchsubmit" value="<?php _e('Search','ml');?>" /></form></li>
-</ul>
-</div><!-- end id:navigation -->
-
-
+<div id="access" role="navigation">
+   	<?php /* Our navigation menu.  If one isn't filled out, wp_nav_menu falls back to wp_page_menu.  The menu assiged to the primary position is the one used.  If none is assigned, the menu with the lowest ID is used.  */ ?>
+    <?php wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) ); ?>
+</div><!-- #access -->
 <div id="container">
 
 
@@ -53,7 +34,5 @@ global $page_sort;
 	<dd><a href="<?php bloginfo('comments_rss2_url'); ?>"><?php _e('Comments','ml');?></a></dd>
 </dl>
 </div><!-- end id:feedarea -->
-
-
-  <div id="headerimage">
+<div id="headerimage">
 </div><!-- end id:headerimage -->

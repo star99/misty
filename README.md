@@ -1,4 +1,4 @@
-Misty 
+Mistylook 3.7.2
 =====
 
-A wordpress theme forked from Mistylook and/or Mistylake
+Orignal files wih LICENCE and README.md
